@@ -7,20 +7,17 @@ function isValid(s: string): boolean {
     }
 
     for (let c of s) {
-        if (c === '(' || c === '[' || c === '{') {
-            stack.push(c);
-        } else {
+        if (c in map) {
             const m = map[c];
             const p = stack.pop();
             if (m !== p) {
                 return false;
             }
+        } else {
+            stack.push(c);
+
         }
     }
 
-    if (stack.length > 0) {
-        return false;
-    }
-
-    return true;
+    return stack.length > 0 ? false : true;
 };
